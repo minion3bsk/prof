@@ -6,5 +6,11 @@
       <div class="image" style="background-image:url(<%= asset_path "no_image.jpg" %>)" />
     <% end %>  
     <h2><%= @user.name %><span><%= @user.name_kana %></span></h2>
+    <% if @questions.present? %>
+      <h3>このユーザーの回答した質問</h3>
+      <div class="clearfix">
+        <%= render partial: "question", collection: @questions %>
+      </div>
+    <% end %>
   </div>
 </div>

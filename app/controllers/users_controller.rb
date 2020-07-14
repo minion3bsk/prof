@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @questions = @user.answerd_questions
   end
   
   def update
     current_user.update(update_params)
   end
+ 
   
   private
   

@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   #association
   belongs_to :group
+  has_many :questions, ->{ order("created_at DESC") }
+  has_many :answers, ->{ order("updated_at DESC") }
+  has_many :answerd_questions, through: :answers, source: :question
+  
 
   #validation
   before_validation :group_key_to_id, if: :has_group_key?
@@ -40,6 +44,11 @@ class User < ApplicationRecord
   
   def name_kana
     "#{family_name_kana}#{first_name_kana}"
+  end  
+  
+   
+  def full_profile?
+    image.attached? && family_name? && family_name_kana? && first_name? && first_name_kana?
   end  
 
   private
